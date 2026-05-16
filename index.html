@@ -22,12 +22,14 @@
   --text:#b8a89a;--text-muted:rgba(184,168,154,0.35);
   --border:rgba(184,168,154,0.08);
   --fd:'Neuropol X',monospace;
+  --ph:clamp(20px,4vw,48px);
+  --nav-h:70px;
 }
-html,body{height:100%}
-body{background:var(--black);color:var(--text);font-family:'Noto Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{height:100%;scroll-behavior:smooth}
+body{height:100%;background:var(--black);color:var(--text);font-family:'Noto Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-y:scroll;scroll-snap-type:none}
 
 /* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:22px 48px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.88);backdrop-filter:blur(12px)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2vw,22px) var(--ph);border-bottom:1px solid var(--border);background:rgba(10,10,10,0.88);backdrop-filter:blur(12px)}
 .nav-logo{cursor:pointer;display:flex;align-items:center}
 .nav-logo img{height:26px}
 .nav-links{display:flex;gap:4px}
@@ -36,7 +38,7 @@ body{background:var(--black);color:var(--text);font-family:'Noto Sans',sans-seri
 .nav-btn.active{color:var(--aqua);border-color:var(--aqua)}
 
 /* Ticker */
-.ticker{position:fixed;top:62px;left:0;right:0;z-index:99;overflow:hidden;height:26px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.6);backdrop-filter:blur(8px)}
+.ticker{position:fixed;top:var(--nav-h);left:0;right:0;z-index:99;overflow:hidden;height:26px;border-bottom:1px solid var(--border);background:rgba(10,10,10,0.6);backdrop-filter:blur(8px)}
 .ticker-inner{display:flex;align-items:center;animation:tickerMove 28s linear infinite;white-space:nowrap;padding:4px 0}
 @keyframes tickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .ticker-item{font-family:var(--fd);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(184,168,154,0.2);padding:0 20px}
@@ -48,8 +50,8 @@ body{background:var(--black);color:var(--text);font-family:'Noto Sans',sans-seri
 @keyframes crossPulse{from{transform:scale(1);opacity:.5}to{transform:scale(1.1);opacity:1}}
 
 /* Hero */
-.hero{position:relative;z-index:1;padding:120px 48px 72px;min-height:580px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
-.hero-glow{position:absolute;width:600px;height:400px;top:50%;left:50%;margin-top:-200px;margin-left:-300px;background:radial-gradient(ellipse,rgba(169,124,80,0.06) 0%,transparent 70%);pointer-events:none;animation:glowPulse 6s ease-in-out infinite alternate}
+.hero{position:relative;z-index:1;padding:clamp(100px,13vw,140px) var(--ph) clamp(48px,6vw,72px);min-height:clamp(480px,80vh,680px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-glow{position:absolute;width:clamp(300px,80vw,600px);height:clamp(200px,55vw,400px);top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(169,124,80,0.06) 0%,transparent 70%);pointer-events:none;animation:glowPulse 6s ease-in-out infinite alternate}
 @keyframes glowPulse{from{opacity:.6}to{opacity:1}}
 .hero-ring{position:absolute;border-radius:50%;border:1px solid rgba(169,124,80,0.06);pointer-events:none;animation:ringRotate 30s linear infinite}
 @keyframes ringRotate{to{transform:rotate(360deg)}}
@@ -72,7 +74,7 @@ body{background:var(--black);color:var(--text);font-family:'Noto Sans',sans-seri
 .action-cell:hover .action-arrow,.action-cell.active .action-arrow{transform:translate(2px,-2px);color:var(--aqua)}
 
 /* Content panels */
-.content-panel{position:relative;z-index:1;padding:0 48px 64px}
+.content-panel{position:relative;z-index:1;padding:0 var(--ph) clamp(48px,6vw,80px)}
 .panel{padding:40px;border:1px solid var(--border);border-radius:6px;background:rgba(16,14,12,0.6);backdrop-filter:blur(4px);animation:blurIn .45s ease both}
 .panel-header{font-family:var(--fd);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:32px;animation:blurIn .5s ease both}
 @keyframes blurIn{from{opacity:0;filter:blur(6px);transform:translateY(10px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}
@@ -90,15 +92,12 @@ body{background:var(--black);color:var(--text);font-family:'Noto Sans',sans-seri
 .founder-ig{color:var(--aqua);text-decoration:none;font-size:10px;letter-spacing:0.1em}
 .founder-ig:hover{text-decoration:underline}
 
-/* WE — Q&A accordion */
-.qa-block{display:flex;flex-direction:column;gap:12px}
-.qa-item{padding:16px;border:1px solid var(--border);border-radius:4px;cursor:pointer;user-select:none;transition:border-color .25s,background .25s}
-.qa-item:hover{border-color:var(--aqua);background:rgba(169,124,80,0.04)}
-.qa-item.open{border-color:var(--aqua)}
-.qa-q{font-family:var(--fd);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--aqua);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.qa-toggle{font-size:18px;line-height:1;font-family:sans-serif;color:var(--aqua);flex-shrink:0}
-.qa-a{font-size:13px;line-height:1.8;color:rgba(184,168,154,0.75);overflow:hidden;max-height:0;transition:max-height .4s ease,opacity .4s ease,margin-top .3s;opacity:0;margin-top:0}
-.qa-item.open .qa-a{max-height:200px;opacity:1;margin-top:12px}
+/* WE — Narrative */
+.saw-narrative{margin-bottom:48px;border-left:2px solid rgba(169,124,80,0.3);padding-left:28px}
+.narrative-heading{font-family:var(--fd);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--aqua);margin:0 0 14px 0;margin-top:36px}
+.saw-narrative .narrative-heading:first-child{margin-top:0}
+.narrative-body{font-size:14px;line-height:1.9;color:rgba(184,168,154,0.8);margin:0 0 28px 0}
+.narrative-legacy{font-size:15px;font-style:italic;color:var(--aqua);margin:0;letter-spacing:0.03em}
 
 /* SAW — work */
 .work-section-label{font-family:var(--fd);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--aqua);margin-bottom:16px;margin-top:8px}
@@ -150,38 +149,95 @@ body{background:var(--black);color:var(--text);font-family:'Noto Sans',sans-seri
 .lightbox-meta{font-family:var(--fd);font-size:11px;color:var(--aqua);margin-top:12px;letter-spacing:0.12em}
 
 /* Footer */
-.site-footer{position:relative;z-index:1;padding:24px 48px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.site-footer{position:relative;z-index:1;padding:clamp(16px,2.5vw,24px) var(--ph);display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
 .footer-copy{font-size:10px;color:rgba(184,168,154,0.25);letter-spacing:0.05em}
 .footer-links{display:flex;gap:16px}
 .footer-link{font-family:var(--fd);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(184,168,154,0.25);text-decoration:none;transition:color .2s}
 .footer-link:hover{color:var(--aqua)}
 
-/* Mobile */
-@media(max-width:768px){
-  .nav{padding:18px 20px}
-  .nav-btn{padding:6px 10px;font-size:9px}
-  .hero{padding:56px 20px 44px;min-height:320px}
+/* ── Hero rings — fluid sizing ──────────────────────────── */
+.hero-ring-1{width:clamp(200px,55vw,420px);height:clamp(200px,55vw,420px);margin-top:calc(clamp(200px,55vw,420px) / -2);margin-left:calc(clamp(200px,55vw,420px) / -2)}
+.hero-ring-2{width:clamp(280px,80vw,600px);height:clamp(280px,80vw,600px);margin-top:calc(clamp(280px,80vw,600px) / -2);margin-left:calc(clamp(280px,80vw,600px) / -2)}
+
+/* ── Responsive ──────────────────────────────────────────── */
+
+/* Wide screens (≥ 1440px) — expand and centre */
+@media(min-width:1440px){
+  :root{--ph:clamp(56px,6vw,120px)}
+  .content-panel{max-width:1600px;margin-left:auto;margin-right:auto}
+  .hero{max-width:1600px;margin-left:auto;margin-right:auto}
+  .site-footer{max-width:1600px;margin-left:auto;margin-right:auto}
+  .three-actions{max-width:840px}
+  .work-grid-h{grid-template-columns:repeat(3,1fr)}
+  .work-grid-v{grid-template-columns:repeat(5,1fr)}
+  .photo-grid{grid-template-columns:repeat(5,1fr)}
+}
+
+/* Standard desktop (1024–1439px) */
+@media(min-width:1024px) and (max-width:1439px){
+  .work-grid-h{grid-template-columns:repeat(3,1fr)}
+  .work-grid-v{grid-template-columns:repeat(4,1fr)}
+  .photo-grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* Tablet landscape (768–1023px) */
+@media(min-width:768px) and (max-width:1023px){
+  :root{--ph:clamp(28px,4vw,44px);--nav-h:66px}
+  .hero{padding:96px var(--ph) 52px}
+  .founder-layout{grid-template-columns:180px 1fr}
+  .work-grid-h{grid-template-columns:repeat(2,1fr)}
+  .work-grid-v{grid-template-columns:repeat(3,1fr)}
+  .photo-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Tablet portrait + large phones (480–767px) */
+@media(max-width:767px){
+  :root{--ph:clamp(18px,5.5vw,32px);--nav-h:58px}
+  .ticker{top:58px}
+  .hero{padding:84px var(--ph) 44px;min-height:auto}
   .hero-headline{font-size:clamp(28px,7vw,44px)}
+  .panel{padding:clamp(18px,4vw,28px)}
   .three-actions{grid-template-columns:1fr;max-width:100%}
   .action-cell{border-right:none;border-bottom:1px solid var(--border)}
   .action-cell:last-child{border-bottom:none}
-  .content-panel{padding:0 20px 48px}
-  .panel{padding:24px}
-  .founder-layout{grid-template-columns:1fr}
-  .founder-photo{max-width:200px}
-  .work-grid-h{grid-template-columns:1fr;gap:8px}
+  .founder-layout{grid-template-columns:1fr;gap:20px}
+  .founder-photo{max-width:180px}
+  .work-grid-h{grid-template-columns:repeat(2,1fr);gap:8px}
   .work-grid-v{grid-template-columns:repeat(2,1fr);gap:8px}
   .photo-grid{grid-template-columns:repeat(2,1fr);gap:8px}
   .onboard-steps{grid-template-columns:1fr}
-  .onboard-cta{flex-direction:column}
+  .onboard-cta{flex-direction:column;gap:8px}
   .cta-btn{width:100%;text-align:center}
-  .site-footer{padding:20px}
-  .crosshair{width:300px;height:300px}
+  .crosshair{width:260px;height:260px;margin:-130px 0 0 -130px}
+  .lightbox-inner{width:95vw}
 }
-@media(max-width:380px){
-  .nav-btn{padding:5px 8px;font-size:8px}
+
+/* Small phones (< 480px) */
+@media(max-width:479px){
+  :root{--ph:16px;--nav-h:50px}
+  .nav{padding:12px 16px}
+  .nav-logo img{height:22px}
+  .nav-btn{padding:5px 8px;font-size:8px;letter-spacing:0.12em}
+  .ticker{top:50px}
+  .hero{padding:70px 16px 36px}
+  .hero-headline{font-size:clamp(22px,7.5vw,32px)}
   .work-grid-h{grid-template-columns:1fr}
-  .work-grid-v{grid-template-columns:repeat(2,1fr)}
+  .work-grid-v{grid-template-columns:repeat(2,1fr);gap:6px}
+  .photo-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .step{padding:14px 12px}
+  .crosshair{width:180px;height:180px;margin:-90px 0 0 -90px}
+  .lightbox-inner{width:98vw}
+  .lightbox-close{top:-34px;padding:5px 10px}
+}
+
+/* Micro (< 360px) */
+@media(max-width:359px){
+  :root{--ph:12px;--nav-h:46px}
+  .nav-btn{padding:4px 6px;font-size:7.5px;letter-spacing:0.08em}
+  .ticker{top:46px}
+  .work-grid-h{grid-template-columns:1fr}
+  .work-grid-v{grid-template-columns:1fr}
+  .photo-grid{grid-template-columns:repeat(2,1fr)}
 }
   </style>
 </head>
@@ -377,20 +433,22 @@ function TiltCard({ src, alt }) {
 }
 
 // ── WE Panel ─────────────────────────────────────────────
-function QAItem({ q, a }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={`qa-item${open ? ' open' : ''}`} onClick={() => setOpen(o => !o)}>
-      <div className="qa-q">{q}<span className="qa-toggle">{open ? '−' : '+'}</span></div>
-      <div className="qa-a">{a}</div>
-    </div>
-  );
-}
-
 function PanelWe() {
   return (
     <div className="panel" key="we">
       <div className="panel-header">// 01 — About the founder</div>
+
+      <div className="saw-narrative">
+        <h2 className="narrative-heading">EVER WONDER WHY SOME BRANDS JUST HIT DIFFERENT?</h2>
+        <p className="narrative-body">We are SAW. And we saw everything. We saw brands with real potential being handed to agencies that didn't care enough. We saw campaigns built to impress boardrooms, not move people. We saw founders pour their life's work into a brand — only to watch it dissolve into the noise, unseen and unheard. The problem was never the brand. It was never the idea. It was who was trusted to tell the story.</p>
+
+        <h2 className="narrative-heading">WHAT IF THE PROBLEM WASN'T THE BRAND — BUT THE PEOPLE TELLING ITS STORY?</h2>
+        <p className="narrative-body">We come from cinema. Before we ever touched a brief, we understood narrative. We understood that the difference between something forgettable and something legendary isn't the budget — it's the soul behind it. The arc that builds. The tension that holds. The frame that hits you somewhere deep before your brain catches up. That's not just how we make films. That's how we think about every single brand we work with.</p>
+
+        <h2 className="narrative-heading">SO WHAT DID WE DO ABOUT IT?</h2>
+        <p className="narrative-body">We built SAW. A team that doesn't just execute — it obsesses. That doesn't just deliver — it transforms. We don't chase trends. We don't sell templates. Your brand gets a blank canvas, fresh eyes, and everything we've got. We find the story hiding inside your business, the one your audience has been waiting to hear, and we build it into something the world cannot look away from. Not just a campaign. Not just content.</p>
+        <p className="narrative-legacy">A legacy in the making.</p>
+      </div>
 
       <div className="founder-layout">
         <div className="founder-photo-wrap">
@@ -420,11 +478,6 @@ function PanelWe() {
         </div>
       </div>
 
-      <div className="qa-block">
-        <QAItem q="Ever wonder why some brands just hit different?" a="We are SAW. And we saw everything. We saw brands being underserved. Campaigns built for approvals, not audiences. Potential wasted on mediocre work." />
-        <QAItem q="What if the problem wasn't the brand — but the people telling its story?" a="We come from cinema. Storytelling is the only language we've ever spoken — the arc, the emotion, the frame that makes you feel something before you know why. That instinct lives in everything we do." />
-        <QAItem q="So what did we do about it?" a="We built something different. A team that spots what others miss, sharpens what others overlook, and gives your brand something most agencies never could." />
-      </div>
     </div>
   );
 }
@@ -532,8 +585,18 @@ function PanelYou() {
 function App() {
   const [active, setActive] = useState(null);
   const [lightbox, setLightbox] = useState(null);
+  const panelRef = useRef(null);
 
   const openLightbox = (video, client) => setLightbox({ video, client });
+
+  const handleTabClick = (key) => {
+    setActive(key);
+    setTimeout(() => {
+      if (panelRef.current) {
+        panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  };
 
   const tabs = [
     { key:'we',  idx:'01', word:'WE',         desc:'Who we are' },
@@ -555,7 +618,7 @@ function App() {
           {tabs.map(t => (
             <button key={t.key}
               className={`nav-btn${active===t.key?' active':''}`}
-              onClick={() => setActive(t.key)}>
+              onClick={() => handleTabClick(t.key)}>
               {t.word}
             </button>
           ))}
@@ -577,20 +640,19 @@ function App() {
       {/* Hero */}
       <div className="hero">
         <div className="hero-glow" />
-        <div className="hero-ring" style={{width:420,height:420,marginTop:-210,marginLeft:-210}} />
-        <div className="hero-ring" style={{width:600,height:600,marginTop:-300,marginLeft:-300,animationDirection:'reverse',animationDuration:'40s'}} />
+        <div className="hero-ring hero-ring-1" />
+        <div className="hero-ring hero-ring-2" style={{animationDirection:'reverse',animationDuration:'40s'}} />
         <div className="eyebrow">Spotted Ads World</div>
         <div className="hero-headline">
-          We <span className="accent">see</span> what<br />others miss.
+          The world doesn't remember average.<br />Neither do we.
         </div>
-        <div className="hero-sub">Strategy. Art. Work.</div>
 
         {/* Action tabs */}
         <div className="three-actions">
           {tabs.map(t => (
             <div key={t.key}
               className={`action-cell${active===t.key?' active':''}`}
-              onClick={() => setActive(t.key)}>
+              onClick={() => handleTabClick(t.key)}>
               <div className="action-idx">{t.idx} —</div>
               <div className="action-word">{t.word}</div>
               <div className="action-desc">{t.desc}</div>
@@ -601,7 +663,7 @@ function App() {
       </div>
 
       {/* Content panels */}
-      <div className="content-panel">
+      <div className="content-panel" ref={panelRef}>
         {active === 'we'  && <PanelWe />}
         {active === 'saw' && <PanelSaw openLightbox={openLightbox} />}
         {active === 'you' && <PanelYou />}
